@@ -1,20 +1,32 @@
 ```jsx
 public enum Status {
-    BORROWED,
-    AVAILABLE,
-    OVERDUED,
-    ARCHIVED;
-    
+    BORROWED("Borrowed"),
+    AVAILABLE("Available"),
+    OVERDUED("Overdued"),
+    ARCHIVED("Archived");
+
+    private String stat;
+    Status(String stat){
+        this.stat=stat;
     }
+
+    public String getStat(){
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+}
 
 
 
 
 public class Book {
     private String title;
-    private Status status;
+    private String status;
 
-    public Book(String title, Status status) {
+    public Book(String title) {
         this.title = title;
         this.status = status;
     }
@@ -23,11 +35,11 @@ public class Book {
         return title;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -41,7 +53,6 @@ public class Book {
 
 
 
-
 public abstract class BookMover {
     public void moveToStatus(Book book, Status requestedStatus) {
         System.out.println("Moving status...");
@@ -52,37 +63,124 @@ public abstract class BookMover {
 
 
 
-public class FromArchivedBookMover extends BookMover {
+class FromArchivedBookMover extends BookMover {
     @Override
     public void moveToStatus(Book book, Status requestedStatus) {
-        if (book.getStatus() == Status.ARCHIVED) {
-            if (requestedStatus == Status.AVAILABLE) {
-                book.setStatus(requestedStatus);
-                System.out.printf("Запрос %s обработан", requestedStatus);
-            } else if (book.getStatus() == Status.ARCHIVED) {
-                System.out.printf("Запрос %s обработан", book.getStatus());
+        String archived=Status.ARCHIVED.getStat();
+        book.setStatus(archived);
+        switch (requestedStatus){
+            case AVAILABLE -> {
+                book.setStatus(Status.AVAILABLE.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", archived, Status.AVAILABLE.getStat() );
             }
+            case BORROWED -> System.out.printf("Переход из %s в статус %s невозможен ", archived, Status.BORROWED.getStat());
+            case OVERDUED-> System.out.printf("Переход из %s в статус %s невозможен ", archived, Status.OVERDUED.getStat());
+            default -> System.out.println("ERROR");
+
+        }
+
+
         }
 
     }
+
     
     
     
     
     
     
-    public class FromAvailableBookMover extends  BookMover{
+class FromAvailableBookMover extends  BookMover{
     @Override
     public void moveToStatus(Book book, Status requestedStatus) {
-        if (book.getStatus()==Status.AVAILABLE){
-            if(requestedStatus==Status.ARCHIVED|| requestedStatus==Status.BORROWED){
-                book.setStatus(requestedStatus);
-                System.out.printf("Запрос %s обработан", requestedStatus);
+        String available=Status.AVAILABLE.getStat();
+
+        switch (requestedStatus){
+            case ARCHIVED -> {
+                book.setStatus(Status.ARCHIVED.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", available, Status.ARCHIVED.getStat() );
             }
-            else if (book.getStatus() == Status.AVAILABLE) {
-                System.out.printf("Запрос %s, обаботан", book.getStatus());
+            case BORROWED -> {
+                book.setStatus(Status.BORROWED.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", available, Status.BORROWED.getStat() );
             }
+            case OVERDUED-> System.out.printf("Переход из %s в статус %s невозможен ", available, Status.OVERDUED.getStat());
+            default -> System.out.println("ERROR");
+
         }
+
+
     }
 }
+
+
+
+
+public class FromOverduedStatusMover extends BookMover {
+    @Override
+    public void moveToStatus(Book book, Status requestedStatus) {
+        String overdued = Status.OVERDUED.getStat();
+        book.setStatus(overdued);
+        switch (requestedStatus) {
+            case ARCHIVED -> {
+                book.setStatus(Status.ARCHIVED.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", overdued, Status.ARCHIVED.getStat() );
+            }
+            case AVAILABLE -> {
+                book.setStatus(Status.AVAILABLE.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", overdued, Status.AVAILABLE.getStat() );
+            }
+            case BORROWED -> System.out.printf("Переход из %s в статус %s невозможен ", overdued, Status.BORROWED.getStat());
+            default -> System.out.println("ERROR");
+
+        }
+
+
+    }
+
+}
+
+
+
+
+
+
+public class FromBorrowedStatusMover extends BookMover{
+    @Override
+    public void moveToStatus(Book book, Status requestedStatus) {
+        String borrowed = Status.BORROWED.getStat();
+        book.setStatus(borrowed);
+        switch (requestedStatus) {
+            case ARCHIVED -> {
+                book.setStatus(Status.ARCHIVED.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", borrowed, Status.ARCHIVED.getStat() );
+            }
+            case AVAILABLE -> {
+                book.setStatus(Status.AVAILABLE.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", borrowed, Status.AVAILABLE.getStat() );
+            }
+            case OVERDUED -> {
+                book.setStatus(Status.OVERDUED.getStat());
+                System.out.printf("Переход из %s в статус %s осуществлен ", borrowed, Status.OVERDUED.getStat() );
+            }
+            default -> System.out.println("ERROR");
+
+        }
+
+
+    }
+
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Book book = new Book("The Lord of the Rings" );
+        BookMover fromAvailableStatusMover = new FromAvailableBookMover();
+        fromAvailableStatusMover.moveToStatus(book, Status.ARCHIVED);
+        System.out.println(book.getStatus());
+
+
+    }
 }
