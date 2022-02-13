@@ -15,12 +15,7 @@ public class FromOverduedStatusMover extends BookMover {
                     System.out.printf("Переход из %s в статус %s осуществлен ", overdued, Status.AVAILABLE.getStat() );
                 }
                 case BORROWED -> System.out.printf("Переход из %s в статус %s невозможен ", overdued, Status.BORROWED.getStat());
-
-
             }
-
-
         }
-
     }
 
