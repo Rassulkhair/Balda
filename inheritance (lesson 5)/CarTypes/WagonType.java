@@ -1,6 +1,6 @@
 package CarTypes;
 
-public class WagonType extends VehicleTypeByBodyTypes{
+public class WagonType extends VehicleTypeByBodyTypes {
 
 
     @Override
@@ -9,3 +9,4 @@ public class WagonType extends VehicleTypeByBodyTypes{
 
     }
 }
+
