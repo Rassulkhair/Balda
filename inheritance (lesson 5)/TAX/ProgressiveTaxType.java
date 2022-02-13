@@ -8,6 +8,5 @@ public class ProgressiveTaxType extends TaxType {
         } else {
             return amount * 0.1;
         }
-
     }
 }
