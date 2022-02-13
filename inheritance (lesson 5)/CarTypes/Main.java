@@ -8,7 +8,7 @@ public class Main {
         VehicleAd kamazAd = new VehicleAd("Kamaz", "45", new TruckType(),
                 new PickupType(), new DieselType());
 
-        adsService.setAdList(new VehicleAd[] {volvoAd, kamazAd});
+        adsService.setAdList(new VehicleAd[]{volvoAd, kamazAd});
 
         adsService.filterByVehicleTypeByPurpose(new PassengerType());
 
@@ -22,7 +22,7 @@ public class Main {
         VehicleAd bugattiAd = new VehicleAd("bugatti", "873", new PassengerType(),
                 new SedanType(), new PetrolType());
 
-        adsService.setAdList(new VehicleAd[] {chevroletAd, bugattiAd});
+        adsService.setAdList(new VehicleAd[]{chevroletAd, bugattiAd});
 
         adsService.filterByVehicleTypeByPurpose(new PassengerType());
 
