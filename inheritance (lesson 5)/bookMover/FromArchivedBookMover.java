@@ -12,11 +12,6 @@ class FromArchivedBookMover extends BookMover {
             }
             case BORROWED -> System.out.printf("Переход из %s в статус %s невозможен ", archived, Status.BORROWED.getStat());
             case OVERDUED-> System.out.printf("Переход из %s в статус %s невозможен ", archived, Status.OVERDUED.getStat());
-
-
         }
-
-
     }
-
 }
