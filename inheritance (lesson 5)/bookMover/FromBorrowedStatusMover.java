@@ -19,10 +19,6 @@ public class FromBorrowedStatusMover extends BookMover{
                 System.out.printf("Переход из %s в статус %s осуществлен ", borrowed, Status.OVERDUED.getStat() );
             }
             default -> System.out.println("ERROR");
-
         }
-
-
     }
-
 }
