@@ -41,7 +41,7 @@ public class VehicleAd {
         return id;
     }
 
-    public String toString(){
+    public String toString() {
         return this.model;
     }
 }
