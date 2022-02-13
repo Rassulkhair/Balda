@@ -1,8 +1,6 @@
 package CarTypes;
 
-public class PetrolType extends VehicleTypeByFuelTypes{
-
-
+public class PetrolType extends VehicleTypeByFuelTypes {
 
 
     @Override
