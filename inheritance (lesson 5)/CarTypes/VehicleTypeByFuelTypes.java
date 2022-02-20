@@ -2,10 +2,7 @@ package CarTypes;
 
 public class VehicleTypeByFuelTypes extends VehicleType {
 
-    public VehicleTypeByFuelTypes() {
-        super("Vehicle type by fuel types");
-    }
-
+    public VehicleTypeByFuelTypes() { super("Vehicle type by fuel types");}
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
@@ -13,5 +10,4 @@ public class VehicleTypeByFuelTypes extends VehicleType {
         VehicleTypeByFuelTypes that = (VehicleTypeByFuelTypes) object;
         return attribute != null && attribute.equals(that.attribute);
     }
-
 }
