@@ -1,9 +1,8 @@
 package CarTypes;
 
 public class VehicleTypeByPurpose extends VehicleType {
-    public VehicleTypeByPurpose() {
-        super("Vehicle type by purpose");
-    }
+    public VehicleTypeByPurpose() { super("Vehicle type by purpose");}
+    
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()){
