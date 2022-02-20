@@ -1,11 +1,7 @@
 package CarTypes;
-
 public class PassengerType extends VehicleTypeByPurpose {
-
-
-    @Override
+ @Override
     public String getTypeName() {
         return VehicleTypeEnum.PASSENGER.name();
-
     }
 }
