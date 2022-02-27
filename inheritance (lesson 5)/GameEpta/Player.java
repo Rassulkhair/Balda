@@ -9,10 +9,7 @@ class Player {
         weaponSlots = new Weapon[]{new Pistol(), new Machine(), new RPG(), new Slingshot(), new WaterGun(),
         };
     }
-    
-    public int getSlotsCount() {
-        return weaponSlots.length;
-    }
+    public int getSlotsCount() {return weaponSlots.length;}
     
     public void shotWithWeapons(int slot) {
         if (slot >= weaponSlots.length) {
@@ -21,6 +18,5 @@ class Player {
         }
         Weapon weapon = weaponSlots[slot];
         weapon.shot();
-        
     }
 }
